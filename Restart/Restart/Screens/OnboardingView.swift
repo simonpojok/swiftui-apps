@@ -13,7 +13,7 @@ struct OnboardingView: View {
     var body: some View {
         ZStack {
             Color("ColorBlue")
-                .ignoresSafeArea(.all, edges: .all)
+                .ignoresSafeArea()
             VStack(spacing: 20) {
                 Spacer()
                 VStack(spacing: 0){
@@ -35,15 +35,7 @@ struct OnboardingView: View {
                         .padding(.horizontal, 10)
                 }
                 ZStack{
-                    ZStack {
-                        Circle()
-                            .stroke(.white.opacity(0.2), lineWidth: 40)
-                            .frame(width: 260, height: 260, alignment: .center)
-                        
-                        Circle()
-                            .stroke(.white.opacity(0.2), lineWidth: 80)
-                            .frame(width: 260, height: 260, alignment: .center)
-                    }
+                    CircleGroupView(ShapeColor: .white, ShapeOpacity: 0.2)
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
