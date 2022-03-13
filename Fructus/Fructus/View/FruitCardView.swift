@@ -22,6 +22,7 @@ struct FruitCardView: View {
                         color: Color(red: 0, green: 0, blue: 0, opacity: 0.15),
                         radius: 8, x : 6, y: 8
                     )
+                    .scaleEffect(isAnimating ? 1.0 : 0.6)
                 // FRUIT: TITLE
                 Text("Blueberry")
                     .foregroundColor(.white)
@@ -37,9 +38,15 @@ struct FruitCardView: View {
                 // BUTTON: START
                 StartButtonView()
             }
-        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-        .background(LinearGradient(colors: [Color("ColorBlueberryLight"), Color("ColorBlueberryDark")], startPoint: .top, endPoint: .bottom))
+        }.onAppear(perform: {
+            withAnimation(.easeOut(duration: 0.5)) {
+                isAnimating = true
+            }
+        })
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+        .background(LinearGradient(gradient: Gradient(colors: [Color("ColorBlueberryLight"), Color("ColorBlueberryDark")]), startPoint: .top, endPoint: .bottom))
             .cornerRadius(20)
+            .padding(.horizontal,20)
     }
 }
 
