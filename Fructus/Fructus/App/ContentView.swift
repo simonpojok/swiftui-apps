@@ -9,17 +9,33 @@ import SwiftUI
 
 struct ContentView: View {
     var fruits: [Fruit] = fruitsData
+    
+    @State private var isShowingSettings: Bool = false
+    @AppStorage("isOnBoarding") private var isOnBoarding: Bool = false
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(fruits.shuffled()) { item in
-                    NavigationLink(destination: FruitDetailView(fruit: item)){
-                        FruitRowView(fruit: item)
-                            .padding(.vertical, 4)
+        if (isOnBoarding) {
+            OnboardingView()
+        } else {
+            NavigationView {
+                List {
+                    ForEach(fruits.shuffled()) { item in
+                        NavigationLink(destination: FruitDetailView(fruit: item)){
+                            FruitRowView(fruit: item)
+                                .padding(.vertical, 4)
+                        }
                     }
                 }
+                .navigationTitle("Fruits")
+                .navigationBarItems(trailing: Button(action: {
+                    isShowingSettings = true
+                }) {
+                    Image(systemName: "slider.horizontal.3")
+                }
+                ).sheet(isPresented: $isShowingSettings, onDismiss: {
+                    isShowingSettings = false
+                }) { SettingsView() }
             }
-            .navigationTitle("Fruits")
         }
     }
 }
