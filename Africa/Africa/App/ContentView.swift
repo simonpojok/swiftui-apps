@@ -22,9 +22,14 @@ struct ContentView: View {
                                 trailing: 0
                             )
                         )
+                
                 ForEach(animals) {animal in
-                    AnimalListItemView(animal: animal)
-                        .padding(.vertical, 5)
+                    
+                    NavigationLink(destination: AnimalDetailView(animal: animal)) {
+                        AnimalListItemView(animal: animal)
+                            .padding(.vertical, 5)
+                    }
+
                 }
             }
             .navigationBarTitle("Africa", displayMode: .large)
