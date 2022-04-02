@@ -15,10 +15,18 @@ struct VideoListView: View {
         NavigationView {
             List {
                 ForEach(videos) { item in
-                    VideoListItemView(video: item)
-                        .padding(.vertical, 8)
+                    NavigationLink(
+                        destination: VideoPlayerView(
+                            videoSelected: item.id,
+                            videoTitle: item.name
+                        )
+                    ) {
+                        VideoListItemView(video: item)
+                            .padding(.vertical, 8)
+                    }
                 }
-            }.listStyle(InsetGroupedListStyle())
+            }
+            .listStyle(InsetGroupedListStyle())
                 .navigationBarTitle("Videos", displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
