@@ -56,7 +56,12 @@ struct ContentView: View {
                             }
 
                         }
+                        
+                        CreditsView()
+                            .modifier(CenterModifier())
                     }
+                    
+                    
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVGrid(columns: gridLayout, spacing: 10) {
@@ -66,7 +71,7 @@ struct ContentView: View {
                                 }
                             }
                         }.padding(10)
-                            .animation(.easeIn)
+                            .animation(.easeIn, value: false)
                     }
                     
                 }
