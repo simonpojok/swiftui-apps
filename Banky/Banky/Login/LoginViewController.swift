@@ -60,8 +60,6 @@ extension LoginViewController {
         errorMessageLabel.textColor = .systemRed
         errorMessageLabel.numberOfLines = 0
         errorMessageLabel.isHidden = true
-        
-        
     }
     
     private func layout() {

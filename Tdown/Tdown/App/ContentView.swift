@@ -22,10 +22,20 @@ struct ContentView: View {
                     .background(Color.white)
                     .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 5)
                 
-                Spacer()
+                ScrollView(.vertical, showsIndicators: false) {
+                    
+                    VStack(spacing: 0) {
+                        FeaturedTabView()
+                            .frame(height: 300)
+                            .padding(.vertical, 20)
+                        
+                        CategoryGrideView()
+                        
+                        FooterView()
+                            .padding(.horizontal)
+                    }
+                }
                 
-                FooterView()
-                    .padding(.horizontal)
             }.background(colorBackground.ignoresSafeArea(edges: .all))
             
         }.ignoresSafeArea(edges: .top)
