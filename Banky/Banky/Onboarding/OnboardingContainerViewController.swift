@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol OnboardingContainerViewControllerDeligate: AnyObject {
+    func didFinishOnboarding(_ sender: OnboardingContainerViewController)
+}
+
 class OnboardingContainerViewController: UIViewController {
     let pageViewController: UIPageViewController
     var pages = [UIViewController]()
     var currentVC: UIViewController
     let closeButton = UIButton(type: .system)
     
+    weak var deleigate: OnboardingContainerViewControllerDeligate?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
@@ -109,6 +114,10 @@ extension OnboardingContainerViewController: UIPageViewControllerDataSource {
 
 extension OnboardingContainerViewController {
     @objc func closeTapped(_ sender: UIButton) {
-        // TODO
+        deleigate?.didFinishOnboarding(self)
+    }
+    
+    @objc func doneTapped(_ sender: UIButton){
+        deleigate?.didFinishOnboarding(self)
     }
 }
