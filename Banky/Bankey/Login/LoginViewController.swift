@@ -1,32 +1,35 @@
 //
 //  ViewController.swift
-//  Banky
+//  Bankey
 //
-//  Created by Simon Peter Ojok on 03/06/2022.
+//  Created by jrasmusson on 2021-09-23.
 //
 
 import UIKit
-
-protocol LoginViewControllerDelegate: AnyObject {
-    func didLogin(_ sender: LoginViewController)
-}
 
 protocol LogoutDelegate: AnyObject {
     func didLogout()
 }
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func didLogin()
+}
+
 class LoginViewController: UIViewController {
+
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
-    let loginView = LoginView()
-    let errorMessageLabel = UILabel()
-    let signInButton = UIButton(type: .system)
     
-    weak var delegate: LoginViewControllerDelegate? // avoid retain cycle
-    var username: String?  {
+    let loginView = LoginView()
+    let signInButton = UIButton(type: .system)
+    let errorMessageLabel = UILabel()
+    
+    weak var delegate: LoginViewControllerDelegate?
+    
+    var username: String? {
         return loginView.usernameTextField.text
     }
-    
+
     var password: String? {
         return loginView.passwordTextField.text
     }
@@ -41,33 +44,33 @@ class LoginViewController: UIViewController {
         super.viewDidDisappear(animated)
         signInButton.configuration?.showsActivityIndicator = false
     }
-
 }
 
-
 extension LoginViewController {
+    
     private func style() {
+        view.backgroundColor = .systemBackground
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.adjustsFontForContentSizeCategory = true
         titleLabel.text = "Bankey"
-        
+
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.textAlignment = .center
         subtitleLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        subtitleLabel.adjustsFontSizeToFitWidth = true
+        subtitleLabel.adjustsFontForContentSizeCategory = true
         subtitleLabel.numberOfLines = 0
-        subtitleLabel.text = "Your premium source for all\nthings banking"
-        
+        subtitleLabel.text = "Your premium source for all things banking!"
+
         loginView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.configuration = .filled()
-        signInButton.configuration?.imagePadding = 8
+        signInButton.configuration?.imagePadding = 8 // for indicator spacing
         signInButton.setTitle("Sign In", for: [])
         signInButton.addTarget(self, action: #selector(signInTapped), for: .primaryActionTriggered)
-    
         
         errorMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         errorMessageLabel.textAlignment = .center
@@ -82,44 +85,44 @@ extension LoginViewController {
         view.addSubview(loginView)
         view.addSubview(signInButton)
         view.addSubview(errorMessageLabel)
-        
+
         // Title
         NSLayoutConstraint.activate([
             subtitleLabel.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 3),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        // Sub Title
+        // Subtitle
         NSLayoutConstraint.activate([
             loginView.topAnchor.constraint(equalToSystemSpacingBelow: subtitleLabel.bottomAnchor, multiplier: 3),
             subtitleLabel.leadingAnchor.constraint(equalTo: loginView.leadingAnchor),
-            subtitleLabel.trailingAnchor.constraint(equalTo: loginView.trailingAnchor),
+            subtitleLabel.trailingAnchor.constraint(equalTo: loginView.trailingAnchor)
         ])
         
-        // Login View
+        // LoginView
         NSLayoutConstraint.activate([
-            loginView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            loginView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 1),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: loginView.trailingAnchor, multiplier: 1)
+            loginView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: loginView.trailingAnchor, multiplier: 2),
+            view.centerYAnchor.constraint(equalTo: loginView.centerYAnchor),
         ])
         
         // Button
-        
         NSLayoutConstraint.activate([
             signInButton.topAnchor.constraint(equalToSystemSpacingBelow: loginView.bottomAnchor, multiplier: 2),
             signInButton.leadingAnchor.constraint(equalTo: loginView.leadingAnchor),
-            loginView.trailingAnchor.constraint(equalTo: signInButton.trailingAnchor)
+            signInButton.trailingAnchor.constraint(equalTo: loginView.trailingAnchor),
         ])
         
-        // Error Label
+        // Error message
         NSLayoutConstraint.activate([
             errorMessageLabel.topAnchor.constraint(equalToSystemSpacingBelow: signInButton.bottomAnchor, multiplier: 2),
-            errorMessageLabel.leadingAnchor.constraint(equalTo: signInButton.leadingAnchor),
-            signInButton.trailingAnchor.constraint(equalTo: errorMessageLabel.trailingAnchor),
+            errorMessageLabel.leadingAnchor.constraint(equalTo: loginView.leadingAnchor),
+            errorMessageLabel.trailingAnchor.constraint(equalTo: loginView.trailingAnchor)
         ])
     }
 }
 
+// MARK: Actions
 extension LoginViewController {
     @objc func signInTapped(sender: UIButton) {
         errorMessageLabel.isHidden = true
@@ -131,19 +134,19 @@ extension LoginViewController {
             assertionFailure("Username / password should never be nil")
             return
         }
+
+        // Temporarily turn off this check
+//        if username.isEmpty || password.isEmpty {
+//            configureView(withMessage: "Username / password cannot be blank")
+//            return
+//        }
         
-        if username.isEmpty || password.isEmpty {
-            configureView(withMessage: "Username and password can not be null")
-            return
-        }
-        
-        if username == "Simon" && password == "Password" {
+        if username == "" && password == "" {
             signInButton.configuration?.showsActivityIndicator = true
-            delegate?.didLogin(self)
+            delegate?.didLogin()
         } else {
-            configureView(withMessage: "Incorrect username and password")
+            configureView(withMessage: "Incorrect username / password")
         }
-        
     }
     
     private func configureView(withMessage message: String) {
@@ -151,3 +154,4 @@ extension LoginViewController {
         errorMessageLabel.text = message
     }
 }
+

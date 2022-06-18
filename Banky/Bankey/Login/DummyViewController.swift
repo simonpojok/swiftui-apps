@@ -1,13 +1,15 @@
 //
 //  DummyViewController.swift
-//  Banky
+//  Bankey
 //
-//  Created by Simon Peter Ojok on 18/06/2022.
+//  Created by jrasmusson on 2021-10-07.
 //
 
+import Foundation
 import UIKit
 
 class DummyViewController: UIViewController {
+    
     let stackView = UIStackView()
     let label = UILabel()
     let logoutButton = UIButton(type: .system)
@@ -24,7 +26,7 @@ class DummyViewController: UIViewController {
 extension DummyViewController {
     func style() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.spacing = 20
         
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +39,7 @@ extension DummyViewController {
         logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .primaryActionTriggered)
     }
     
-    func layout(){
+    func layout() {
         stackView.addArrangedSubview(label)
         stackView.addArrangedSubview(logoutButton)
         
@@ -45,14 +47,11 @@ extension DummyViewController {
         
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
-}
-
-
-extension DummyViewController {
-    @objc func logoutButtonTapped(sender: UIButton){
+    
+    @objc func logoutButtonTapped(sender: UIButton) {
         logoutDelegate?.didLogout()
     }
 }
