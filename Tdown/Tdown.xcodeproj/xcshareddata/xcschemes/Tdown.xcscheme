@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
+   LastUpgradeVersion = "1330"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6E788ECC28496609001CA3C3"
-               BuildableName = "Banky.app"
-               BlueprintName = "Banky"
-               ReferencedContainer = "container:Banky.xcodeproj">
+               BlueprintIdentifier = "6E96DAA128469EE000E9D5E8"
+               BuildableName = "Tdown.app"
+               BlueprintName = "Tdown"
+               ReferencedContainer = "container:Tdown.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -43,10 +44,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6E788ECC28496609001CA3C3"
-            BuildableName = "Banky.app"
-            BlueprintName = "Banky"
-            ReferencedContainer = "container:Banky.xcodeproj">
+            BlueprintIdentifier = "6E96DAA128469EE000E9D5E8"
+            BuildableName = "Tdown.app"
+            BlueprintName = "Tdown"
+            ReferencedContainer = "container:Tdown.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -56,6 +57,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "6E96DAA128469EE000E9D5E8"
+            BuildableName = "Tdown.app"
+            BlueprintName = "Tdown"
+            ReferencedContainer = "container:Tdown.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
