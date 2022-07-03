@@ -25,6 +25,7 @@ extension AccountSummaryViewController {
     }
     
     private func setupTableView(){
+        tableView.backgroundColor = appColor
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -76,9 +77,9 @@ extension AccountSummaryViewController: UITableViewDelegate {
 
 extension AccountSummaryViewController {
     private func fetchData() {
-        let savings = AccountSummaryCell.ViewModel(accountType: .Banking, accountName: "Basic Savings")
-        let visa  = AccountSummaryCell.ViewModel(accountType: .CreditCard, accountName: "Visa Avion Card")
-        let investment = AccountSummaryCell.ViewModel(accountType: .Investment, accountName: "Tax-Free Saver")
+        let savings = AccountSummaryCell.ViewModel(accountType: .Banking, accountName: "Basic Savings", balance: 567.9650)
+        let visa  = AccountSummaryCell.ViewModel(accountType: .CreditCard, accountName: "Visa Avion Card", balance: 10038449.4533)
+        let investment = AccountSummaryCell.ViewModel(accountType: .Investment, accountName: "Tax-Free Saver", balance: 34.958)
         
         accounts.append(savings)
         accounts.append(visa)

@@ -128,6 +128,7 @@ extension AccountSummaryCell {
     struct ViewModel {
         let accountType: AccountType
         let accountName: String
+        let balance: Decimal
     }
     
     func configure(with vm: ViewModel) {
