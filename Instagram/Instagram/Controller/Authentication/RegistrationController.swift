@@ -161,7 +161,7 @@ extension RegistrationController {
                 print("DEBUG: User Registration Fail \(error)")
             }
             
-            print("DEBUG: Successfully registered user with firestore")
+            self.dismiss(animated: true)
         }
     }
 }

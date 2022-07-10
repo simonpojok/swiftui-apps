@@ -40,4 +40,18 @@ struct AuthenticationService {
             }
         }
     }
+    
+    static func logUserIn(
+        withEmail email: String,
+        password: String,
+        completion: @escaping(AuthDataResult?) -> Void
+    ) {
+        Auth.auth().signIn(withEmail: email, password: password) { authDataResult ,error in
+            if let error = error {
+                print("DEBUG: Login Failed \(error)")
+                return
+            }
+            completion(authDataResult)
+        }
+    }
 }

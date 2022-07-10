@@ -39,6 +39,7 @@ class LoginController: ViewController {
         button.layer.cornerRadius = 5
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleLoggin), for: .touchUpInside)
         return button
     }()
     
@@ -121,7 +122,6 @@ extension LoginController {
     func configureNotificationObservers() {
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
-        updateForm()
     }
     
     @objc func textDidChange(sender: UITextField){
@@ -129,6 +129,15 @@ extension LoginController {
             viewModel.email = sender.text
         } else {
             viewModel.password = sender.text
+        }
+        updateForm()
+    }
+    
+    @objc func handleLoggin() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        AuthenticationService.logUserIn(withEmail: email, password: password) {_ in 
+            self.dismiss(animated: true)
         }
     }
 }
