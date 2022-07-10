@@ -10,6 +10,7 @@ import UIKit
 class RegistrationController: ViewController {
     // MARK: - Properties
     private var viewModel = RegistrationViewModel()
+    private var profleImage: UIImage?
     
     private lazy var plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -44,6 +45,7 @@ class RegistrationController: ViewController {
         button.layer.cornerRadius = 5
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -138,6 +140,30 @@ extension RegistrationController {
         picker.allowsEditing = true
         present(picker, animated: true, completion: nil)
     }
+    
+    @objc func handleShowSignUp() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let fullname = fullNameTextField.text else { return }
+        guard let username = userNameTextField.text else { return }
+        guard let userImage = self.profleImage else { return }
+        
+        let credential = AuthCredential(
+            email: email,
+            password: password,
+            fullname: fullname,
+            username: username,
+            profileImage: userImage
+        )
+        
+        AuthenticationService.registerUser(withCredential: credential) { error in
+            if let error = error {
+                print("DEBUG: User Registration Fail \(error)")
+            }
+            
+            print("DEBUG: Successfully registered user with firestore")
+        }
+    }
 }
 
 extension RegistrationController: FormViewModel {
@@ -153,6 +179,7 @@ extension RegistrationController: FormViewModel {
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[.editedImage] as? UIImage else { return }
+        profleImage = selectedImage
         plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
         plusPhotoButton.layer.masksToBounds = true
         plusPhotoButton.layer.borderColor = UIColor.white.cgColor
