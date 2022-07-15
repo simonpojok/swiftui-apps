@@ -19,6 +19,8 @@
 		6E0C24B9287A02B000D5DE0F /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C24B8287A02B000D5DE0F /* ImageSelectorController.swift */; };
 		6E0C24BB287A02BB00D5DE0F /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C24BA287A02BB00D5DE0F /* NotificationController.swift */; };
 		6E0C24BD287A02C400D5DE0F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C24BC287A02C400D5DE0F /* ProfileController.swift */; };
+		6E2141AC287CA03800792879 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2141AB287CA03800792879 /* ProfileCell.swift */; };
+		6E2141AE287CA05A00792879 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2141AD287CA05A00792879 /* ProfileHeader.swift */; };
 		6E2D7BB8287A1BEE00FF4255 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D7BB7287A1BEE00FF4255 /* FeedCell.swift */; };
 		6E2D7BBA287A224A00FF4255 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D7BB9287A224A00FF4255 /* Extensions.swift */; };
 		6E2D7BBD287AAE4500FF4255 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D7BBC287AAE4500FF4255 /* LoginController.swift */; };
@@ -45,6 +47,8 @@
 		6E0C24B8287A02B000D5DE0F /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
 		6E0C24BA287A02BB00D5DE0F /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		6E0C24BC287A02C400D5DE0F /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		6E2141AB287CA03800792879 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		6E2141AD287CA05A00792879 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		6E2D7BB7287A1BEE00FF4255 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		6E2D7BB9287A224A00FF4255 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6E2D7BBC287AAE4500FF4255 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 		6E0C24AD287A006900D5DE0F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6E2141AF287CA06300792879 /* Profile */,
 				6E2D7BB7287A1BEE00FF4255 /* FeedCell.swift */,
 				6E2D7BC0287AC44600FF4255 /* CustomTextField.swift */,
 			);
@@ -178,6 +183,15 @@
 				6E2D7BB9287A224A00FF4255 /* Extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		6E2141AF287CA06300792879 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6E2141AB287CA03800792879 /* ProfileCell.swift */,
+				6E2141AD287CA05A00792879 /* ProfileHeader.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		6E2D7BBB287AAD9B00FF4255 /* Authentication */ = {
@@ -305,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E2D7BC1287AC44600FF4255 /* CustomTextField.swift in Sources */,
+				6E2141AE287CA05A00792879 /* ProfileHeader.swift in Sources */,
 				6E0C24972879FF6A00D5DE0F /* ViewController.swift in Sources */,
 				6E2D7BBD287AAE4500FF4255 /* LoginController.swift in Sources */,
 				6E2D7BB8287A1BEE00FF4255 /* FeedCell.swift in Sources */,
@@ -319,6 +334,7 @@
 				6E2D7BBA287A224A00FF4255 /* Extensions.swift in Sources */,
 				6E2D7BCB287B3BAD00FF4255 /* AuthenticationService.swift in Sources */,
 				6E2D7BC9287B3A9500FF4255 /* ImageUploader.swift in Sources */,
+				6E2141AC287CA03800792879 /* ProfileCell.swift in Sources */,
 				6E0C24952879FF6A00D5DE0F /* SceneDelegate.swift in Sources */,
 				6E2D7BBF287AAE5500FF4255 /* RegistrationController.swift in Sources */,
 			);

@@ -70,10 +70,11 @@ class MainTabController: UITabBarController {
             rootViewController: NotificationController()
         )
         
+        let profileLayout = UICollectionViewFlowLayout()
         let profile = templateNavigationController(
             unselectedImage: UIImage(named: "profile_unselected"),
             selectedImage: UIImage(named: "profile_selected"),
-            rootViewController: ProfileController()
+            rootViewController: ProfileController(collectionViewLayout: profileLayout)
         )
         
         tabBar.tintColor = .label
