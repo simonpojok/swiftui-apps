@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProfileHeader: UICollectionReusableView {
     // MARK: - Properties
@@ -13,15 +14,14 @@ class ProfileHeader: UICollectionReusableView {
     
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "venom-7")
         iv.contentMode = .scaleAspectFill
+        iv.backgroundColor = .lightGray
         iv.clipsToBounds = true
         return iv
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Eddie Brock"
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
@@ -71,6 +71,27 @@ class ProfileHeader: UICollectionReusableView {
         return label
     }()
     
+    private lazy var gridButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "grid"), for: .normal)
+        button.tintColor = UIColor(white: 0, alpha: 0.2)
+        return button
+    }()
+    
+    private lazy var listButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "list"), for: .normal)
+        button.tintColor = UIColor(white: 0, alpha: 0.2)
+        return button
+    }()
+    
+    private lazy var bookmarkButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "ribbon"), for: .normal)
+        button.tintColor = UIColor(white: 0, alpha: 0.2)
+        return button
+    }()
+    
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -103,6 +124,53 @@ class ProfileHeader: UICollectionReusableView {
             paddingLeft: 24,
             paddingRight: 24
         )
+        
+        let stack = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel])
+        stack.distribution = .fillEqually
+        addSubview(stack)
+        
+        stack.centerY(inView: profileImageView)
+        stack.anchor(
+            left: profileImageView.rightAnchor,
+            right: rightAnchor,
+            paddingLeft: 12,
+            paddingRight: 12,
+            height: 50
+        )
+        
+        let topDivider = UIView()
+        topDivider.backgroundColor = .lightGray
+        
+        let bottomDivier = UIView()
+        bottomDivier.backgroundColor = .lightGray
+        
+        let buttonStack = UIStackView(arrangedSubviews: [gridButton, listButton, bookmarkButton])
+        buttonStack.distribution = .fillEqually
+        addSubview(buttonStack)
+        addSubview(topDivider)
+        addSubview(bottomDivier)
+        
+        buttonStack.anchor(
+            left: leftAnchor,
+            bottom: bottomAnchor,
+            right: rightAnchor,
+            height: 50
+        )
+        
+        topDivider.anchor(
+            top: buttonStack.topAnchor,
+            left: leftAnchor,
+            right: rightAnchor,
+            height: 0.5
+        )
+        
+        bottomDivier.anchor(
+            top: buttonStack.bottomAnchor,
+            left: leftAnchor,
+            right: rightAnchor,
+            height: 0.5
+        )
+        
     }
     
     required init?(coder: NSCoder) {
@@ -130,5 +198,10 @@ class ProfileHeader: UICollectionReusableView {
             )
         )
         return attributedText
+    }
+    
+    func configure(viewModel: ProfileHeaderViewModel) {
+        nameLabel.text = viewModel.fullname
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
     }
 }

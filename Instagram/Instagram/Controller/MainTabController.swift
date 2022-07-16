@@ -11,6 +11,11 @@ import Firebase
 class MainTabController: UITabBarController {
     
     // MARK: - Lifecycle
+    var user: User? {
+        didSet {
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +28,7 @@ class MainTabController: UITabBarController {
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
                 let controller = LoginController()
+                controller.delegate = self
                 let nav = UINavigationController(rootViewController: controller)
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
@@ -70,11 +76,10 @@ class MainTabController: UITabBarController {
             rootViewController: NotificationController()
         )
         
-        let profileLayout = UICollectionViewFlowLayout()
         let profile = templateNavigationController(
             unselectedImage: UIImage(named: "profile_unselected"),
             selectedImage: UIImage(named: "profile_selected"),
-            rootViewController: ProfileController(collectionViewLayout: profileLayout)
+            rootViewController: ProfileController(user: user)
         )
         
         tabBar.tintColor = .label
@@ -92,5 +97,12 @@ class MainTabController: UITabBarController {
         nav.tabBarItem.selectedImage = selectedImage
         nav.navigationBar.tintColor = .black
         return nav
+    }
+}
+
+
+extension MainTabController: AuthenticationDelegate {
+    func authenticationDidComplete() {
+        self.dismiss(animated: true)
     }
 }

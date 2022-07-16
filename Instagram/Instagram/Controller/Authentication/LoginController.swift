@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol AuthenticationDelegate: AnyObject {
+    func authenticationDidComplete()
+}
+
 class LoginController: ViewController {
     // MARK: - Properties
     private var viewModel = LoginViewModel()
+    weak var delegate: AuthenticationDelegate?
     
     private let iconImage: UIImageView = {
         let iv = UIImageView()
@@ -136,8 +141,8 @@ extension LoginController {
     @objc func handleLoggin() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        AuthenticationService.logUserIn(withEmail: email, password: password) {_ in 
-            self.dismiss(animated: true)
+        AuthenticationService.logUserIn(withEmail: email, password: password) {_ in
+            self.delegate?.authenticationDidComplete()
         }
     }
 }

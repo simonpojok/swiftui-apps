@@ -19,6 +19,11 @@
 		6E0C24B9287A02B000D5DE0F /* ImageSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C24B8287A02B000D5DE0F /* ImageSelectorController.swift */; };
 		6E0C24BB287A02BB00D5DE0F /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C24BA287A02BB00D5DE0F /* NotificationController.swift */; };
 		6E0C24BD287A02C400D5DE0F /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C24BC287A02C400D5DE0F /* ProfileController.swift */; };
+		6E1017EF288290A100261A90 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1017EE288290A100261A90 /* UserService.swift */; };
+		6E1017F1288290CD00261A90 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1017F0288290CD00261A90 /* Constants.swift */; };
+		6E1017F328829B1500261A90 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1017F228829B1500261A90 /* User.swift */; };
+		6E1017F528829FF500261A90 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1017F428829FF500261A90 /* ProfileHeaderViewModel.swift */; };
+		6E1017F72882C04E00261A90 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1017F62882C04E00261A90 /* UserCell.swift */; };
 		6E2141AC287CA03800792879 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2141AB287CA03800792879 /* ProfileCell.swift */; };
 		6E2141AE287CA05A00792879 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2141AD287CA05A00792879 /* ProfileHeader.swift */; };
 		6E2D7BB8287A1BEE00FF4255 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2D7BB7287A1BEE00FF4255 /* FeedCell.swift */; };
@@ -47,6 +52,11 @@
 		6E0C24B8287A02B000D5DE0F /* ImageSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectorController.swift; sourceTree = "<group>"; };
 		6E0C24BA287A02BB00D5DE0F /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
 		6E0C24BC287A02C400D5DE0F /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		6E1017EE288290A100261A90 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		6E1017F0288290CD00261A90 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6E1017F228829B1500261A90 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6E1017F428829FF500261A90 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		6E1017F62882C04E00261A90 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		6E2141AB287CA03800792879 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		6E2141AD287CA05A00792879 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
 		6E2D7BB7287A1BEE00FF4255 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -132,6 +142,7 @@
 		6E0C24AC287A006100D5DE0F /* Modal */ = {
 			isa = PBXGroup;
 			children = (
+				6E1017F228829B1500261A90 /* User.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -142,6 +153,7 @@
 				6E2141AF287CA06300792879 /* Profile */,
 				6E2D7BB7287A1BEE00FF4255 /* FeedCell.swift */,
 				6E2D7BC0287AC44600FF4255 /* CustomTextField.swift */,
+				6E1017F62882C04E00261A90 /* UserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -150,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				6E2D7BC2287AD07D00FF4255 /* AuthenticationViewModel.swift */,
+				6E1017F428829FF500261A90 /* ProfileHeaderViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -173,6 +186,8 @@
 			children = (
 				6E2D7BC8287B3A9500FF4255 /* ImageUploader.swift */,
 				6E2D7BCA287B3BAD00FF4255 /* AuthenticationService.swift */,
+				6E1017EE288290A100261A90 /* UserService.swift */,
+				6E1017F0288290CD00261A90 /* Constants.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -326,14 +341,19 @@
 				6E0C24B9287A02B000D5DE0F /* ImageSelectorController.swift in Sources */,
 				6E0C24BB287A02BB00D5DE0F /* NotificationController.swift in Sources */,
 				6E2D7BC3287AD07D00FF4255 /* AuthenticationViewModel.swift in Sources */,
+				6E1017F72882C04E00261A90 /* UserCell.swift in Sources */,
 				6E0C24B7287A029E00D5DE0F /* SearchController.swift in Sources */,
 				6E0C24932879FF6A00D5DE0F /* AppDelegate.swift in Sources */,
+				6E1017F328829B1500261A90 /* User.swift in Sources */,
 				6E0C24BD287A02C400D5DE0F /* ProfileController.swift in Sources */,
+				6E1017F528829FF500261A90 /* ProfileHeaderViewModel.swift in Sources */,
+				6E1017F1288290CD00261A90 /* Constants.swift in Sources */,
 				6E0C24B5287A028C00D5DE0F /* FeedController.swift in Sources */,
 				6E0C24B3287A011200D5DE0F /* MainTabController.swift in Sources */,
 				6E2D7BBA287A224A00FF4255 /* Extensions.swift in Sources */,
 				6E2D7BCB287B3BAD00FF4255 /* AuthenticationService.swift in Sources */,
 				6E2D7BC9287B3A9500FF4255 /* ImageUploader.swift in Sources */,
+				6E1017EF288290A100261A90 /* UserService.swift in Sources */,
 				6E2141AC287CA03800792879 /* ProfileCell.swift in Sources */,
 				6E0C24952879FF6A00D5DE0F /* SceneDelegate.swift in Sources */,
 				6E2D7BBF287AAE5500FF4255 /* RegistrationController.swift in Sources */,
