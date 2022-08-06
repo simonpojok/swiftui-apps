@@ -13,10 +13,13 @@ struct ContentView: View {
     @State private var showGuide : Bool = false
     @State private var showInfo : Bool = false
     @GestureState private var dragState = DragState.inactive
+    private var dragAreaThreshold: CGFloat = 65.0
+    @State private var lastCardIndex : Int = 1
+    @State private var cardRemovalTransition : AnyTransition = AnyTransition.trailingBottom
     
     // MARK: - CARD VIEWS
     
-    var cardViews: [CardView] = {
+    @State var cardViews: [CardView] = {
         var views = [CardView]()
         for index in 0..<2 {
             views.append(CardView(honeymoon: honeymoonData[index]))
@@ -28,6 +31,15 @@ struct ContentView: View {
     private func isTopCard(cardView: CardView) -> Bool {
         guard let index = cardViews.firstIndex(where: {$0.id == cardView.id }) else { return false}
         return index == 0
+    }
+    
+    // MARK: - Move Card
+    private func moveCards() {
+        cardViews.removeFirst()
+        self.lastCardIndex += 1
+        let honeymoon = honeymoonData[lastCardIndex % honeymoonData.count]
+        let newCardView = CardView(honeymoon: honeymoon)
+        cardViews.append(newCardView)
     }
     
     // MARK: - DRAG STATES
@@ -86,6 +98,22 @@ struct ContentView: View {
                     
                     cardView
                         .zIndex(self.isTopCard(cardView: cardView) ? 1 : 0)
+                        .overlay(ZStack {
+                            // MARK: - XMark
+                            let xMarkOpacity = self.dragState.translation.width < -self.dragAreaThreshold && self.isTopCard(cardView: cardView) ? 1.0 : 0.0
+                            
+                            Image(systemName: "x.circle")
+                                .modifier(SymbolModifier())
+                                .opacity(xMarkOpacity)
+                            
+                            // MARK: - Heart
+                            let heartMarkOpacity  = self.dragState.translation.width > self.dragAreaThreshold && self.isTopCard(cardView: cardView) ? 1.0 : 0.0
+                            
+                            Image(systemName: "heart.circle")
+                                .modifier(SymbolModifier())
+                                .opacity(heartMarkOpacity)
+                            
+                        })
                         .offset(x: xOffset, y: yOffset)
                         .scaleEffect(self.dragState.isDragging && self.isTopCard(cardView: cardView) ? 0.8 : 1.0)
                         .rotationEffect(Angle(degrees: self.isTopCard(cardView: cardView) ? Double(self.dragState.translation.width / 12) : 0))
@@ -102,8 +130,32 @@ struct ContentView: View {
                                     break
                                 }
                                 
+                            }).onChanged({(value) in
+                                guard case .second(true, let drag?) = value else {
+                                    return
+                                }
+                                
+                                if drag.translation.width < -self.dragAreaThreshold {
+                                    self.cardRemovalTransition = .leadingBottom
+                                }
+                                
+                                if drag.translation.width > self.dragAreaThreshold {
+                                    self.cardRemovalTransition = .trailingBottom
+                                }
                             })
+                                .onEnded({(value) in
+                                    guard case .second(true, let drag?) = value else {
+                                        return
+                                    }
+                                    
+                                    if drag.translation.width < -self.dragAreaThreshold ||
+                                        drag.translation.width > self.dragAreaThreshold {
+                                        playSound(sound: "sound-rise", type: "mp3")
+                                        self.moveCards()
+                                    }
+                                })
                         )
+                        .transition(self.cardRemovalTransition)
                 }
             }.padding(.horizontal)
             
